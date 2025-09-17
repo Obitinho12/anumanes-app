@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anumanês - Dicionário</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkFudW1hbsOqcyAtIERpY2lvbsOhcmlvIiwKICAic2hvcnRfbmFtZSI6ICJBbnVtYW7DqnMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzYzNjZmMSIsCiAgInRoZW1lX2NvbG9yIjogIiM2MzY2ZjEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUJzYVdGdElqMG5hSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY25JSE5wZW1VOUp6SXdNQ0JvWldsblNJUWdPR0VnT0dFblBpQThhbk5xUXpjOVBmOGdPR0VnVGtKR1FrRWdPSEppVGtaR1IzUTFOa0k1UW5wdGRXNHZPSEprV1VkSE0xOVdOVzFpWTFkU1J6bHhjeTh4V0ZoNExYWXlUVnBIT0U1VGQwb3laVzVXTWxWNVdqRTFhRmd4Vm5wWk0zc2hlV3RWWkc5M05YWkJaMjgzUm01aWMwNTFPV2RUUm10Yks4bE1kRk56Vkdsb016aExRVWxaVGxkaVNHVnJOVlUzYzJGb2JVaGtiMWhuVGk1YWFUZFhNRTFWU2pKa1RHUjZOV1JMZDI5TmJsbHVPVlJSTlRWbWJGTm5SVkpjUG1sSFQyOXBjVlZNZFZabVNFNHZhekpYVVhsaE1WQjBUVVYwTjJSdFNYRkVOa3BCYjI5SGJWQm1UVUlnUVc0dFNXOTNOUzByWmpOVU1UTnRVMmMxWkZVMGVHdHljbGhqZVhWM01VaHlVVmM5UGo0OEwzTjJaejQ9IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: #f8fafc;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 50px 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #e0e7ff;
+        }
+        
+        .admin-btn, .settings-btn {
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            border: none;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .back-btn {
+            padding: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            border: none;
+            margin-right: 12px;
+            color: white;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .vocab-card {
+            display: flex;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .vocab-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 16px;
+            font-size: 32px;
+            color: #059669;
+        }
+        
+        .vocab-info h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+        
+        .vocab-info p {
+            font-size: 14px;
+            color: #64748b;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            margin-left: 8px;
+            font-size: 16px;
+        }
+        
+        .category-filter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .category-toggle {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background: white;
+            color: #6b7280;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .categories {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            max-width: 100%;
+        }
+        
+        .category-btn {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            background: white;
+            color: #6b7280;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .category-btn.active {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .notepad {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 2px solid #059669;
+        }
+        
+        .notepad-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .notepad-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #059669;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 8px;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .notepad textarea {
+            width: 100%;
+            min-height: 120px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            outline: none;
+        }
+        
+        .clear-btn {
+            margin-left: auto;
+            padding: 4px 8px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .word-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .word-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .word-anumanes {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+        
+        .word-portuguese {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        
+        .word-category {
+            background: #e0e7ff;
+            color: #6366f1;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .word-hint {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #fee2e2;
+            color: #dc2626;
+            font-size: 14px;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .modal h2 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .btn-cancel {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        
+        .btn-primary {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .btn-add {
+            width: 100%;
+            background: #f97316;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        .add-btn {
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            border: none;
+            color: white;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- TELA INICIAL -->
+        <div id="home-screen" class="screen active">
+            <div class="header">
+                <div>
+                    <h1>Anumanês</h1>
+                    <p>Dicionário</p>
+                </div>
+                <button class="settings-btn" onclick="showLogin()" id="settings-btn">⚙️</button>
+            </div>
+            
+            <div class="content">
+                <div class="vocab-card" onclick="showVocab()">
+                    <div class="vocab-icon">📖</div>
+                    <div class="vocab-info">
+                        <h3>Vocabulário</h3>
+                        <p id="word-count">293 palavras salvas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TELA VOCABULÁRIO -->
+        <div id="vocab-screen" class="screen">
+            <div class="header">
+                <div style="display: flex; align-items: center;">
+                    <button class="back-btn" onclick="showHome()">←</button>
+                    <div>
+                        <h1 style="font-size: 24px;">Vocabulário</h1>
+                        <p id="filtered-count">293 palavras</p>
+                    </div>
+                </div>
+                <button class="add-btn hidden" onclick="showAddWord()" id="add-word-btn">+</button>
+            </div>
+
+            <div style="padding: 20px; background: white; border-bottom: 1px solid #e5e7eb;">
+                <div class="search-bar">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Buscar..." id="search-input" oninput="filterWords()">
+                </div>
+
+                <div class="category-filter">
+                    <h3 style="font-size: 16px; font-weight: bold; color: #374151;">Filtrar por categoria</h3>
+                    <button class="category-toggle" onclick="toggleCategories()" id="category-toggle">🔽 Ocultar</button>
+                </div>
+
+                <div class="categories" id="categories">
+                    <!-- Categorias serão inseridas via JavaScript -->
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- BLOCO DE NOTAS -->
+                <div class="notepad">
+                    <div class="notepad-header">
+                        <div class="notepad-icon">📝</div>
+                        <h3 style="font-size: 16px; font-weight: bold; color: #059669;">Meu Bloco de Notas</h3>
+                        <button class="clear-btn" onclick="clearNotepad()">Limpar</button>
+                    </div>
+                    
+                    <textarea id="notepad" placeholder="Toque nas palavras abaixo para adicioná-las aqui automaticamente, ou escreva suas próprias anotações..."></textarea>
+                    
+                    <p style="font-size: 12px; color: #6b7280; margin: 8px 0 0 0;">
+                        💡 Dica: Toque em qualquer palavra da lista para adicioná-la rapidamente ao seu texto!
+                    </p>
+                </div>
+
+                <!-- LISTA DE PALAVRAS -->
+                <div id="word-list">
+                    <!-- Palavras serão inseridas via JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL LOGIN -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <h2>Login ADM</h2>
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Usuário: Obitinho">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Senha: 123456">
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-cancel" onclick="hideLogin()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="doLogin()">Entrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ADICIONAR PALAVRA -->
+        <div id="add-word-modal" class="modal">
+            <div class="modal-content">
+                <h2>Nova Palavra</h2>
+                <div class="input-group">
+                    <input type="text" id="new-anumanes" placeholder="Palavra em Anumanês">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="new-portuguese" placeholder="Tradução em português">
+                </div>
+                <div class="input-group">
+                    <select id="new-category">
+                        <option value="substantivo">Substantivo</option>
+                        <option value="verbo">Verbo</option>
+                        <option value="adjetivo">Adjetivo</option>
+                        <option value="pronome">Pronome</option>
+                        <option value="advérbio">Advérbio</option>
+                        <option value="preposição">Preposição</option>
+                        <option value="interjeição">Interjeição</option>
+                        <option value="neutra">Neutra</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-cancel" onclick="hideAddWord()">Cancelar</button>
+                    <button class="btn btn-add" onclick="addWord()">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DADOS
+        let vocabulario = [
+            { id: 1, anumanes: 'Buariga', portugues: 'água', categoria: 'substantivo' },
+            { id: 2, anumanes: 'Auvo', portugues: 'amar', categoria: 'verbo' },
+            { id: 3, anumanes: 'Raiô', portugues: 'oi', categoria: 'interjeição' },
+            { id: 4, anumanes: 'Naura', portugues: 'agora', categoria: 'advérbio' },
+            { id: 5, anumanes: 'Tari', portugues: 'aí (onde o ouvinte está)', categoria: 'advérbio' },
+            { id: 6, anumanes: 'Aré', portugues: 'ali (indicando lugar)', categoria: 'advérbio' },
+            { id: 7, anumanes: 'Sumego', portugues: 'algo/alguma/algum', categoria: 'pronome' },
+            { id: 8, anumanes: 'Frado', portugues: 'amigar', categoria: 'verbo' },
+            { id: 9, anumanes: 'Ieni', portugues: 'ano', categoria: 'substantivo' },
+            { id: 10, anumanes: 'Kazu', portugues: 'ânus', categoria: 'substantivo' },
+            { id: 11, anumanes: 'Bêdjo', portugues: 'anjo/ser angelical', categoria: 'substantivo' },
+            { id: 12, anumanes: 'LoBêndjo', portugues: 'anjo', categoria: 'substantivo' },
+            { id: 13, anumanes: 'Alipa', portugues: 'apenas/só', categoria: 'advérbio' },
+            { id: 14, anumanes: 'Apratchi', portugues: 'aprender', categoria: 'verbo' },
+            { id: 15, anumanes: 'Kere', portugues: 'aqui (onde o falador está)', categoria: 'advérbio' },
+            { id: 16, anumanes: 'Sauti', portugues: 'ausentar', categoria: 'verbo' },
+            { id: 17, anumanes: 'LoSauti', portugues: 'ausência (sem)', categoria: 'substantivo' },
+            { id: 18, anumanes: 'Betchi', portugues: 'aumentativo/hipérbole', categoria: 'neutra' },
+            { id: 19, anumanes: 'Tarrâma', portugues: 'arrumar', categoria: 'verbo' },
+            { id: 20, anumanes: 'Atu', portugues: 'até', categoria: 'preposição' },
+            { id: 21, anumanes: 'Nolhe', portugues: 'anotar', categoria: 'verbo' },
+            { id: 22, anumanes: 'Fapinshove', portugues: 'apaixonar', categoria: 'verbo' },
+            { id: 23, anumanes: 'Dreke', portugues: 'beber', categoria: 'verbo' },
+            { id: 24, anumanes: 'Besuki', portugues: 'fazer besteira (coisa que não presta)', categoria: 'verbo' },
+            { id: 25, anumanes: 'Goda', portugues: 'ser bom/ser do bem', categoria: 'verbo' },
+            { id: 26, anumanes: 'Bianti', portugues: 'ser bonito', categoria: 'verbo' },
+            { id: 27, anumanes: 'Bumbi', portugues: 'ser burro', categoria: 'verbo' },
+            { id: 28, anumanes: 'Dagorro', portugues: 'cachorro', categoria: 'substantivo' },
+            { id: 29, anumanes: 'Cadere', portugues: 'cadê', categoria: 'advérbio' },
+            { id: 30, anumanes: 'Braiberu', portugues: 'cérebro', categoria: 'substantivo' },
+            { id: 31, anumanes: 'Issiu', portugues: 'céu', categoria: 'substantivo' },
+            { id: 32, anumanes: 'Konsép', portugues: 'conceituar', categoria: 'verbo' },
+            { id: 33, anumanes: 'Kroa', portugues: 'chorar', categoria: 'verbo' },
+            { id: 34, anumanes: 'Koingi', portugues: 'coisa (pode ser verbo)', categoria: 'neutra' },
+            { id: 35, anumanes: 'LoKoingi', portugues: 'coisa (quando não é verbo)', categoria: 'substantivo' },
+            { id: 36, anumanes: 'Cufi', portugues: 'com', categoria: 'preposição' },
+            { id: 37, anumanes: 'Cufei', portugues: 'comigo', categoria: 'pronome' },
+            { id: 38, anumanes: 'Congri', portugues: 'concordar', categoria: 'verbo' },
+            { id: 39, anumanes: 'Rorasanti', portugues: 'coração', categoria: 'substantivo' },
+            { id: 40, anumanes: 'Crimate', portugues: 'criar', categoria: 'verbo' },
+            { id: 41, anumanes: 'Sigito', portugues: 'certo', categoria: 'adjetivo' },
+            { id: 42, anumanes: 'Komiti', portugues: 'comer', categoria: 'verbo' },
+            { id: 43, anumanes: 'Konte', portugues: 'continuar', categoria: 'verbo' },
+            { id: 44, anumanes: 'Dófe', portugues: 'de/da/do', categoria: 'preposição' },
+            { id: 45, anumanes: 'Dofili', portugues: 'dele', categoria: 'pronome' },
+            { id: 46, anumanes: 'Dofila', portugues: 'dela', categoria: 'pronome' },
+            { id: 47, anumanes: 'Deiti', portugues: 'dia', categoria: 'substantivo' },
+            { id: 48, anumanes: 'Djikinado', portugues: 'dicionário', categoria: 'substantivo' },
+            { id: 49, anumanes: 'Dicafiu', portugues: 'dificuldade/difícil', categoria: 'substantivo' },
+            { id: 50, anumanes: 'Dis', portugues: 'disso/isso', categoria: 'pronome' },
+            { id: 51, anumanes: 'Djis', portugues: 'disso/isso (variação)', categoria: 'pronome' },
+            { id: 52, anumanes: 'Divabeki', portugues: 'devolver', categoria: 'verbo' },
+            { id: 53, anumanes: 'LoDódus', portugues: 'Deus/divindade suprema', categoria: 'substantivo' },
+            { id: 54, anumanes: 'Dódus', portugues: 'divindade', categoria: 'substantivo' },
+            { id: 55, anumanes: 'Des', portugues: 'desse/esse', categoria: 'pronome' },
+            { id: 56, anumanes: 'Djes', portugues: 'desse/esse (variação)', categoria: 'pronome' },
+            { id: 57, anumanes: 'Dosade', portugues: 'fazer doideira', categoria: 'verbo' },
+            { id: 58, anumanes: 'Póim', portugues: 'doer', categoria: 'verbo' },
+            { id: 59, anumanes: 'Dismipi', portugues: 'dormir', categoria: 'verbo' },
+            { id: 60, anumanes: 'Funveti', portugues: 'divertir', categoria: 'verbo' },
+            { id: 61, anumanes: 'Kondeiti', portugues: 'diário', categoria: 'substantivo' },
+            { id: 62, anumanes: 'Falka', portugues: 'dizer/falar', categoria: 'verbo' },
+            { id: 63, anumanes: 'Tebi', portugues: 'diminutivo', categoria: 'neutra' },
+            { id: 64, anumanes: 'Lotebi', portugues: 'menor', categoria: 'adjetivo' },
+            { id: 65, anumanes: 'Eni', portugues: 'e (de listagem)', categoria: 'neutra' },
+            { id: 66, anumanes: 'Beni', portugues: 'e (de listagem - variação)', categoria: 'neutra' },
+            { id: 67, anumanes: 'Imt', portugues: 'em/no/na', categoria: 'preposição' },
+            { id: 68, anumanes: 'Etem', portugues: 'em/no/na (variação)', categoria: 'preposição' },
+            { id: 69, anumanes: 'Tenka', portugues: 'ensinar', categoria: 'verbo' },
+            { id: 71, anumanes: 'Isteki', portugues: 'enfiar/meter', categoria: 'verbo' },
+            { id: 72, anumanes: 'Étre', portugues: 'entrar', categoria: 'verbo' },
+            { id: 73, anumanes: 'Tes', portugues: 'este/deste', categoria: 'pronome' },
+            { id: 74, anumanes: 'Espaiti', portugues: 'esperar', categoria: 'verbo' },
+            { id: 75, anumanes: 'Istchi', portugues: 'está/tá', categoria: 'verbo' },
+            { id: 76, anumanes: 'Tchi', portugues: 'está/tá (abreviado)', categoria: 'verbo' },
+            { id: 77, anumanes: 'Istala', portugues: 'estrela', categoria: 'substantivo' },
+            { id: 78, anumanes: 'Ezadu', portugues: 'exato', categoria: 'adjetivo' },
+            { id: 79, anumanes: 'Rili', portugues: 'ele', categoria: 'pronome' },
+            { id: 80, anumanes: 'Rila', portugues: 'ela', categoria: 'pronome' },
+            { id: 81, anumanes: 'Bai', portugues: 'eu', categoria: 'pronome' },
+            { id: 82, anumanes: 'Ei', portugues: 'eu (variação)', categoria: 'pronome' },
+            { id: 83, anumanes: 'Fentra', portugues: 'encontrar', categoria: 'verbo' },
+            { id: 84, anumanes: 'Erao', portugues: 'errar', categoria: 'verbo' },
+            { id: 85, anumanes: 'Eduki', portugues: 'executar/fazer', categoria: 'verbo' },
+            { id: 86, anumanes: 'Efazi', portugues: 'facilitar', categoria: 'verbo' },
+            { id: 87, anumanes: 'Foti', portugues: 'fato', categoria: 'substantivo' },
+            { id: 88, anumanes: 'Faige', portugues: 'fogo/chama', categoria: 'substantivo' },
+            { id: 89, anumanes: 'Fainiu', portugues: 'finalizar', categoria: 'verbo' },
+            { id: 90, anumanes: 'Fitei', portugues: 'ficar', categoria: 'verbo' },
+            { id: 91, anumanes: 'Friko', portugues: 'fraco', categoria: 'adjetivo' },
+            { id: 92, anumanes: 'Fitrogi', portugues: 'forte', categoria: 'adjetivo' },
+            { id: 93, anumanes: 'Frax', portugues: 'frase', categoria: 'substantivo' },
+            { id: 94, anumanes: 'Ure', portugues: 'indicação de futuro', categoria: 'neutra' },
+            { id: 95, anumanes: 'Re', portugues: 'indicação de futuro (variação)', categoria: 'neutra' },
+            { id: 96, anumanes: 'Loure', portugues: 'o futuro', categoria: 'substantivo' },
+            { id: 97, anumanes: 'Keto', portugues: 'gato', categoria: 'substantivo' },
+            { id: 98, anumanes: 'Jeniu', portugues: 'tornar genial', categoria: 'verbo' },
+            { id: 99, anumanes: 'Pespole', portugues: 'gente/pessoas', categoria: 'substantivo' },
+            { id: 100, anumanes: 'Krupi', portugues: 'grupo', categoria: 'substantivo' },
+            { id: 101, anumanes: 'Gaiske', portugues: 'gostar', categoria: 'verbo' },
+            { id: 102, anumanes: 'Jigi', portugues: 'grande', categoria: 'adjetivo' },
+            { id: 103, anumanes: 'Gêva', portugues: 'dar', categoria: 'verbo' },
+            { id: 104, anumanes: 'Ririó', portugues: 'ser heróico', categoria: 'verbo' },
+            { id: 105, anumanes: 'Tchuje', portugues: 'hoje', categoria: 'advérbio' },
+            { id: 106, anumanes: 'Ménem', portugues: 'homem', categoria: 'substantivo' },
+            { id: 107, anumanes: 'Recóliro', portugues: 'helicóptero', categoria: 'substantivo' },
+            { id: 108, anumanes: 'Runomi', portugues: 'humanizar', categoria: 'verbo' },
+            { id: 109, anumanes: 'Rastreia', portugues: 'história', categoria: 'substantivo' },
+            { id: 110, anumanes: 'Lindogue', portugues: 'idioma', categoria: 'substantivo' },
+            { id: 111, anumanes: 'Idoti', portugues: 'idiota', categoria: 'substantivo' },
+            { id: 112, anumanes: 'LiMeime', portugues: 'igual/mesmo', categoria: 'adjetivo' },
+            { id: 113, anumanes: 'Meime', portugues: 'igualar/tornar o mesmo', categoria: 'verbo' },
+            { id: 114, anumanes: 'Ida', portugues: 'ideia', categoria: 'substantivo' },
+            { id: 115, anumanes: 'Intejenia', portugues: 'inteligência', categoria: 'substantivo' },
+            { id: 116, anumanes: 'Brânóde', portugues: 'irmão', categoria: 'substantivo' },
+            { id: 117, anumanes: 'Brâno', portugues: 'irmão (variação)', categoria: 'substantivo' },
+            { id: 118, anumanes: 'Brâ', portugues: 'irmão (abreviado)', categoria: 'substantivo' },
+            { id: 119, anumanes: 'Mueidi', portugues: 'jeito/modo', categoria: 'substantivo' },
+            { id: 120, anumanes: 'Jauri', portugues: 'já (imediatismo)', categoria: 'advérbio' },
+            { id: 121, anumanes: 'LioRunomi', portugues: 'humano', categoria: 'substantivo' },
+            { id: 122, anumanes: 'Lirede', portugues: 'ler', categoria: 'verbo' },
+            { id: 123, anumanes: 'Buvri', portugues: 'livro', categoria: 'substantivo' },
+            { id: 124, anumanes: 'Lagau', portugues: 'ligar/telefonar', categoria: 'verbo' },
+            { id: 125, anumanes: 'Letri', portugues: 'letra', categoria: 'substantivo' },
+            { id: 126, anumanes: 'Betchi Bianti', portugues: 'lindo', categoria: 'adjetivo' },
+            { id: 127, anumanes: 'Be\'Bianti', portugues: 'lindo (contração)', categoria: 'adjetivo' },
+            { id: 128, anumanes: 'Lare', portugues: 'lá (bem longe)', categoria: 'advérbio' },
+            { id: 129, anumanes: 'Kalóki', portugues: 'local', categoria: 'substantivo' },
+            { id: 130, anumanes: 'Mare', portugues: 'mais (adição)', categoria: 'advérbio' },
+            { id: 131, anumanes: 'Basi', portugues: 'mas (oposição/porém)', categoria: 'neutra' },
+            { id: 132, anumanes: 'Belhô', portugues: 'melhor', categoria: 'adjetivo' },
+            { id: 133, anumanes: 'Beró', portugues: 'melhor (variação)', categoria: 'adjetivo' },
+            { id: 134, anumanes: 'Mie', portugues: 'meu', categoria: 'pronome' },
+            { id: 135, anumanes: 'Laitra', portugues: 'mentir', categoria: 'verbo' },
+            { id: 136, anumanes: 'Béto', portugues: 'muito', categoria: 'advérbio' },
+            { id: 137, anumanes: 'Mohiu', portugues: 'morro/monte', categoria: 'substantivo' },
+            { id: 138, anumanes: 'Notchai', portugues: 'noite', categoria: 'substantivo' },
+            { id: 139, anumanes: 'Nuó', portugues: 'nós', categoria: 'pronome' },
+            { id: 140, anumanes: 'Nuru', portugues: 'nosso', categoria: 'pronome' },
+            { id: 141, anumanes: 'Niuvi', portugues: 'novo', categoria: 'adjetivo' },
+            { id: 142, anumanes: 'Nói', portugues: 'não', categoria: 'advérbio' },
+            { id: 143, anumanes: 'Nóki', portugues: 'não (variação)', categoria: 'advérbio' },
+            { id: 144, anumanes: 'Tea', portugues: 'o/a', categoria: 'pronome' },
+            { id: 145, anumanes: 'Ukati', portugues: 'o que', categoria: 'pronome' },
+            { id: 146, anumanes: 'Rótchio', portugues: 'odiar', categoria: 'verbo' },
+            { id: 147, anumanes: 'Tôgaki', portugues: 'obrigado', categoria: 'interjeição' },
+            { id: 148, anumanes: 'Palordra', portugues: 'palavra', categoria: 'substantivo' },
+            { id: 149, anumanes: 'Pasom', portugues: 'paixão', categoria: 'substantivo' },
+            { id: 150, anumanes: 'Fra', portugues: 'para/pra', categoria: 'preposição' },
+            { id: 151, anumanes: 'Pisró', portugues: 'parar', categoria: 'verbo' },
+            { id: 152, anumanes: 'Loado', portugues: 'passado', categoria: 'substantivo' },
+            { id: 153, anumanes: 'Pêtigi', portugues: 'pesar (ficar/tornar pesado)', categoria: 'verbo' },
+            { id: 154, anumanes: 'Kauntigi', portugues: 'pesar (contar o peso)', categoria: 'verbo' },
+            { id: 155, anumanes: 'Péntiki', portugues: 'pensar/achar', categoria: 'verbo' },
+            { id: 156, anumanes: 'Piskou', portugues: 'pequeno', categoria: 'adjetivo' },
+            { id: 157, anumanes: 'Plozo', portugues: 'por favor', categoria: 'interjeição' },
+            { id: 158, anumanes: 'Paki', portugues: 'por que? (pergunta)', categoria: 'advérbio' },
+            { id: 159, anumanes: 'Bipóke', portugues: 'porque (resposta/causa)', categoria: 'neutra' },
+            { id: 160, anumanes: 'Póke', portugues: 'porque (variação)', categoria: 'neutra' },
+            { id: 161, anumanes: 'Potchi', portugues: 'ponto', categoria: 'substantivo' },
+            { id: 162, anumanes: 'Cone', portugues: 'poder/capacidade/permissão', categoria: 'substantivo' },
+            { id: 163, anumanes: 'Nesidi', portugues: 'precisar', categoria: 'verbo' },
+            { id: 164, anumanes: 'Daride', portugues: 'querido/querida', categoria: 'adjetivo' },
+            { id: 165, anumanes: 'Kuene', portugues: 'quando', categoria: 'advérbio' },
+            { id: 166, anumanes: 'Kautchi', portugues: 'quanto', categoria: 'advérbio' },
+            { id: 167, anumanes: 'Kuran', portugues: 'querer', categoria: 'verbo' },
+            { id: 168, anumanes: 'Deke', portugues: 'que', categoria: 'pronome' },
+            { id: 169, anumanes: 'Keo', portugues: 'quem', categoria: 'pronome' },
+            { id: 170, anumanes: 'Kum', portugues: 'quem (variação)', categoria: 'pronome' },
+            { id: 171, anumanes: 'Refiki', portugues: 'referir', categoria: 'verbo' },
+            { id: 172, anumanes: 'Puri', portugues: 'ruim (desconforto)', categoria: 'adjetivo' },
+            { id: 173, anumanes: 'Madi', portugues: 'mal', categoria: 'adjetivo' },
+            { id: 174, anumanes: 'Ristra', portugues: 'rua', categoria: 'substantivo' },
+            { id: 175, anumanes: 'Silua', portugues: 'sarar', categoria: 'verbo' },
+            { id: 176, anumanes: 'Sou', portugues: 'saber', categoria: 'verbo' },
+            { id: 177, anumanes: 'Ébi', portugues: 'ser/é', categoria: 'verbo' },
+            { id: 178, anumanes: 'Fentchil', portugues: 'sentir', categoria: 'verbo' },
+            { id: 179, anumanes: 'Semvrer', portugues: 'sempre', categoria: 'advérbio' },
+            { id: 180, anumanes: 'Sió', portugues: 'seu/teu', categoria: 'pronome' },
+            { id: 181, anumanes: 'Izi', portugues: 'sim', categoria: 'advérbio' },
+            { id: 182, anumanes: 'Simi', portugues: 'sorrir', categoria: 'verbo' },
+            { id: 183, anumanes: 'Sauboti', portugues: 'sobre/acerca de', categoria: 'preposição' },
+            { id: 184, anumanes: 'Soline', portugues: 'sozinho', categoria: 'adjetivo' },
+            { id: 185, anumanes: 'Drina', portugues: 'sonhar', categoria: 'verbo' },
+            { id: 186, anumanes: 'Supeko', portugues: 'suspeitar', categoria: 'verbo' },
+            { id: 187, anumanes: 'Djuso', portugues: 'suco', categoria: 'substantivo' },
+            { id: 188, anumanes: 'Tchubi', portugues: 'também', categoria: 'advérbio' },
+            { id: 189, anumanes: 'Tchaibi', portugues: 'tchau', categoria: 'interjeição' },
+            { id: 190, anumanes: 'Tchimpeo', portugues: 'tempo', categoria: 'substantivo' },
+            { id: 191, anumanes: 'Trandi', portugues: 'traduzir', categoria: 'verbo' },
+            { id: 192, anumanes: 'Talto', portugues: 'tudo/todos', categoria: 'pronome' },
+            { id: 193, anumanes: 'Tráki', portugues: 'atrás', categoria: 'advérbio' },
+            { id: 194, anumanes: 'Uzre', portugues: 'usar', categoria: 'verbo' },
+            { id: 195, anumanes: 'Sukou', portugues: 'único', categoria: 'adjetivo' },
+            { id: 196, anumanes: 'Felosti', portugues: 'ser veloz', categoria: 'verbo' },
+            { id: 197, anumanes: 'Sandes', portugues: 'vender', categoria: 'verbo' },
+            { id: 198, anumanes: 'Trudade', portugues: 'ser verdadeiro', categoria: 'verbo' },
+            { id: 199, anumanes: 'Iusê', portugues: 'você', categoria: 'pronome' },
+            { id: 200, anumanes: 'Vu', portugues: 'você (variação)', categoria: 'pronome' },
+            { id: 201, anumanes: 'Vilkan', portugues: 'ser vilanesco', categoria: 'verbo' },
+            { id: 202, anumanes: 'Vemkis', portugues: 'valeu', categoria: 'interjeição' },
+            { id: 203, anumanes: 'Sivi', portugues: 'ver', categoria: 'verbo' },
+            { id: 204, anumanes: 'Viri', portugues: 'ver (variação)', categoria: 'verbo' },
+            { id: 205, anumanes: 'Teva', portugues: 'ter', categoria: 'verbo' },
+            { id: 206, anumanes: 'Bocá', portugues: 'tornar', categoria: 'verbo' },
+            { id: 207, anumanes: 'Ikluki', portugues: 'incluir', categoria: 'verbo' },
+            { id: 208, anumanes: 'Lauso', portugues: 'dar aula', categoria: 'verbo' },
+            { id: 209, anumanes: 'Gói', portugues: 'ir/vai', categoria: 'verbo' },
+            { id: 210, anumanes: 'Sóripla', portugues: 'desculpar', categoria: 'verbo' },
+            { id: 211, anumanes: 'Saumege', portugues: 'alguém', categoria: 'pronome' },
+            { id: 212, anumanes: 'Rilea', portugues: 'real', categoria: 'adjetivo' },
+            { id: 213, anumanes: 'Dunereko', portugues: 'de nada', categoria: 'interjeição' },
+            { id: 214, anumanes: 'Pasta', portugues: 'passar/exceder', categoria: 'verbo' },
+            { id: 215, anumanes: 'Orau', portugues: 'hora', categoria: 'substantivo' },
+            { id: 216, anumanes: 'Sento', portugues: 'então', categoria: 'advérbio' },
+            { id: 217, anumanes: 'Inatchi', portugues: 'iniciar', categoria: 'verbo' },
+            { id: 218, anumanes: 'Teafi', portugues: 'terra', categoria: 'substantivo' },
+            { id: 219, anumanes: 'Fora', portugues: 'forma/modo/jeito', categoria: 'substantivo' },
+            { id: 220, anumanes: 'Foralos', portugues: 'forma física/formato visível', categoria: 'substantivo' },
+            { id: 221, anumanes: 'Semafora', portugues: 'desforme/sem forma', categoria: 'adjetivo' },
+            { id: 222, anumanes: 'Semaego', portugues: 'vazio/sem nada', categoria: 'adjetivo' },
+            { id: 223, anumanes: 'Inatchīpio', portugues: 'o/no princípio', categoria: 'substantivo' },
+            { id: 224, anumanes: 'Lauzi', portugues: 'iluminar', categoria: 'verbo' },
+            { id: 225, anumanes: 'Arébi', portugues: 'haver', categoria: 'verbo' },
+            { id: 226, anumanes: 'Tarnum', portugues: 'tarde', categoria: 'substantivo' },
+            { id: 227, anumanes: 'Nóime', portugues: 'nomear', categoria: 'verbo' },
+            { id: 228, anumanes: 'Acepá', portugues: 'aceitar', categoria: 'verbo' },
+            { id: 229, anumanes: 'Provlabit', portugues: 'provavelmente', categoria: 'advérbio' },
+            { id: 230, anumanes: 'Lalfatrogi', portugues: 'mandar/ordenar', categoria: 'verbo' },
+            { id: 231, anumanes: 'LoLalfatrogi', portugues: 'a ordem', categoria: 'substantivo' },
+            { id: 232, anumanes: 'LiLalfatrogi', portugues: 'mandão', categoria: 'substantivo' },
+            { id: 233, anumanes: 'Tarferum', portugues: 'tarde', categoria: 'substantivo' },
+            { id: 234, anumanes: 'Manim', portugues: 'manhã', categoria: 'substantivo' },
+            { id: 235, anumanes: 'Medo', portugues: 'meio (de algo)', categoria: 'substantivo' },
+            { id: 236, anumanes: 'Apéri', portugues: 'alegrar', categoria: 'verbo' },
+            { id: 237, anumanes: 'Forsete', portugues: 'esquecer', categoria: 'verbo' },
+            { id: 238, anumanes: 'Tcheisto', portugues: 'peito', categoria: 'substantivo' },
+            { id: 239, anumanes: 'Vomteki', portugues: 'voltar', categoria: 'verbo' },
+            { id: 240, anumanes: 'Sifi', portugues: 'se', categoria: 'pronome' },
+            { id: 241, anumanes: 'Kétchi', portugues: 'aquilo', categoria: 'pronome' },
+            { id: 242, anumanes: 'Suni', portugues: 'ter sono', categoria: 'verbo' },
+            { id: 243, anumanes: 'Bam', portugues: 'um/uma', categoria: 'pronome' },
+            { id: 244, anumanes: 'Nabón', portugues: 'nascer', categoria: 'verbo' },
+            { id: 245, anumanes: 'Adona', portugues: 'acabar', categoria: 'verbo' },
+            { id: 246, anumanes: 'Pôtébi', portugues: 'perceber', categoria: 'verbo' },
+            { id: 247, anumanes: 'Gêtá', portugues: 'chegar', categoria: 'verbo' },
+            { id: 248, anumanes: 'Fôsto', portugues: 'rosto', categoria: 'substantivo' },
+            { id: 249, anumanes: 'Ru', portugues: 'ou', categoria: 'neutra' },
+            { id: 250, anumanes: 'Tainti', portugues: 'tintar/pintar algo', categoria: 'verbo' },
+            { id: 251, anumanes: 'Lapo', portugues: 'lábio', categoria: 'substantivo' },
+            { id: 252, anumanes: 'Taintrapo', portugues: 'batom', categoria: 'substantivo' },
+            { id: 253, anumanes: 'Nomare', portugues: 'não mais', categoria: 'advérbio' },
+            { id: 254, anumanes: 'Tigá', portugues: 'rasgar', categoria: 'verbo' },
+            { id: 255, anumanes: 'Pensa', portugues: 'calça', categoria: 'substantivo' },
+            { id: 256, anumanes: 'Chuto', portugues: 'encurtar/tornar curto', categoria: 'verbo' },
+            { id: 257, anumanes: 'Penchuto', portugues: 'shorts (roupa)', categoria: 'substantivo' },
+            { id: 258, anumanes: 'Laucha', portugues: 'abaixar/diminuir', categoria: 'verbo' },
+            { id: 259, anumanes: 'Tóni', portugues: 'tom', categoria: 'substantivo' },
+            { id: 260, anumanes: 'Feó', portugues: 'através de/pelo/por', categoria: 'preposição' },
+            { id: 261, anumanes: 'Tróde', portugues: 'trocar', categoria: 'verbo' },
+            { id: 262, anumanes: 'Reza', portugues: 'arrasar/demolir/machucar gravemente', categoria: 'verbo' },
+            { id: 263, anumanes: 'Cause', portugues: 'casa', categoria: 'substantivo' },
+            { id: 264, anumanes: 'Lude', portugues: 'perder', categoria: 'verbo' },
+            { id: 265, anumanes: 'Fribê', portugues: 'libertar', categoria: 'verbo' },
+            { id: 266, anumanes: 'LoFribê', portugues: 'liberdade', categoria: 'substantivo' },
+            { id: 267, anumanes: 'LioFribê', portugues: 'ser livre', categoria: 'verbo' },
+            { id: 268, anumanes: 'LiFribê', portugues: 'estar livre', categoria: 'verbo' },
+            { id: 269, anumanes: 'Livi', portugues: 'viver', categoria: 'verbo' },
+            { id: 270, anumanes: 'LoLivi', portugues: 'vida', categoria: 'substantivo' },
+            { id: 271, anumanes: 'Detaje', portugues: 'desejar/ter vontade', categoria: 'verbo' },
+            { id: 272, anumanes: 'Detriva', portugues: 'entregar', categoria: 'verbo' },
+            { id: 273, anumanes: 'Umôdi', portugues: 'mundo', categoria: 'substantivo' },
+            { id: 274, anumanes: 'Fritá', portugues: 'brigar', categoria: 'verbo' },
+            { id: 275, anumanes: 'Lópi', portugues: 'largar', categoria: 'verbo' },
+            { id: 276, anumanes: 'Vemo', portugues: 'vem', categoria: 'verbo' },
+            { id: 277, anumanes: 'Utu', portugues: 'útil', categoria: 'adjetivo' },
+            { id: 278, anumanes: 'Sufi', portugues: 'sofrer', categoria: 'verbo' },
+            { id: 279, anumanes: 'Siélfi', portugues: 'se (de si mesmo)', categoria: 'pronome' },
+            { id: 280, anumanes: 'Butchi', portugues: 'botar', categoria: 'verbo' },
+            { id: 281, anumanes: 'Pleigá', portugues: 'lugar', categoria: 'substantivo' },
+            { id: 282, anumanes: 'Sonetchi', portugues: 'sincero/honesto', categoria: 'adjetivo' },
+            { id: 283, anumanes: 'Anténdi', portugues: 'entender', categoria: 'verbo' },
+            { id: 284, anumanes: 'Fegli', portugues: 'ser feio', categoria: 'verbo' },
+            { id: 285, anumanes: 'Taike', portugues: 'tipo/como tal/like', categoria: 'neutra' },
+            { id: 286, anumanes: 'Sisde', portugues: 'entristecer', categoria: 'verbo' },
+            { id: 287, anumanes: 'Persa', portugues: 'pessoa', categoria: 'substantivo' },
+            { id: 288, anumanes: 'Fushō', portugues: 'funcionar', categoria: 'verbo' },
+            { id: 289, anumanes: 'Avesmâu', portugues: 'avaliar', categoria: 'verbo' },
+            { id: 290, anumanes: 'Rezura', portugues: 'resultar/dar resultado', categoria: 'verbo' },
+            { id: 291, anumanes: 'Jemgo', portugues: 'empregar', categoria: 'verbo' },
+            { id: 292, anumanes: 'Incuro', portugues: 'instruir', categoria: 'verbo' },
+            { id: 293, anumanes: 'IncuroTor', portugues: 'instrutor', categoria: 'substantivo' }
+        ];
+
+        const categorias = ['todas', 'substantivo', 'verbo', 'adjetivo', 'pronome', 'advérbio', 'preposição', 'interjeição', 'neutra'];
+        
+        let currentScreen = 'home';
+        let isAdmin = false;
+        let selectedCategory = 'todas';
+        let showCategories = true;
+        let filteredWords = vocabulario;
+
+        // FUNÇÕES DE NAVEGAÇÃO
+        function showHome() {
+            hideAllScreens();
+            document.getElementById('home-screen').classList.add('active');
+            currentScreen = 'home';
+        }
+
+        function showVocab() {
+            hideAllScreens();
+            document.getElementById('vocab-screen').classList.add('active');
+            currentScreen = 'vocab';
+            renderCategories();
+            filterWords();
+        }
+
+        function hideAllScreens() {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+        }
+
+        // FUNÇÕES DE LOGIN
+        function showLogin() {
+            document.getElementById('login-modal').style.display = 'flex';
+        }
+
+        function hideLogin() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function doLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'Obitinho' && password === '123456') {
+                isAdmin = true;
+                hideLogin();
+                updateUI();
+            }
+        }
+
+        function updateUI() {
+            const settingsBtn = document.getElementById('settings-btn');
+            const addBtn = document.getElementById('add-word-btn');
+            
+            if (isAdmin) {
+                settingsBtn.innerHTML = 'ADM';
+                settingsBtn.onclick = () => {
+                    isAdmin = false;
+                    updateUI();
+                };
+                addBtn.classList.remove('hidden');
+            } else {
+                settingsBtn.innerHTML = '⚙️';
+                settingsBtn.onclick = showLogin;
+                addBtn.classList.add('hidden');
+            }
+            
+            if (currentScreen === 'vocab') {
+                renderWordList();
+            }
+        }
+
+        // FUNÇÕES DE CATEGORIAS
+        function renderCategories() {
+            const categoriesContainer = document.getElementById('categories');
+            categoriesContainer.innerHTML = '';
+            
+            categorias.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `category-btn ${selectedCategory === cat ? 'active' : ''}`;
+                btn.textContent = cat;
+                btn.onclick = () => selectCategory(cat);
+                categoriesContainer.appendChild(btn);
+            });
+        }
+
+        function selectCategory(category) {
+            selectedCategory = category;
+            renderCategories();
+            filterWords();
+        }
+
+        function toggleCategories() {
+            const categoriesDiv = document.getElementById('categories');
+            const toggleBtn = document.getElementById('category-toggle');
+            
+            showCategories = !showCategories;
+            
+            if (showCategories) {
+                categoriesDiv.style.display = 'flex';
+                toggleBtn.innerHTML = '🔽 Ocultar';
+            } else {
+                categoriesDiv.style.display = 'none';
+                toggleBtn.innerHTML = '▶️ Mostrar';
+            }
+        }
+
+        // FUNÇÕES DE FILTRO E BUSCA
+        function filterWords() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            
+            filteredWords = vocabulario.filter(word => {
+                const matchesSearch = word.anumanes.toLowerCase().includes(searchTerm) ||
+                                    word.portugues.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'todas' || word.categoria === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+            
+            document.getElementById('filtered-count').textContent = `${filteredWords.length} palavras`;
+            renderWordList();
+        }
+
+        // FUNÇÃO PARA RENDERIZAR LISTA DE PALAVRAS
+        function renderWordList() {
+            const wordList = document.getElementById('word-list');
+            wordList.innerHTML = '';
+            
+            filteredWords.forEach(word => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-card';
+                wordDiv.onclick = () => addWordToNotepad(word);
+                
+                wordDiv.innerHTML = `
+                    <div style="flex: 1;">
+                        <div class="word-anumanes">${word.anumanes}</div>
+                        <div class="word-portuguese">${word.portugues}</div>
+                        <span class="word-category">${word.categoria}</span>
+                        <p class="word-hint">↗ Toque para adicionar ao bloco</p>
+                    </div>
+                    ${isAdmin ? `<button class="delete-btn" onclick="deleteWord(event, ${word.id})">🗑️</button>` : ''}
+                `;
+                
+                wordList.appendChild(wordDiv);
+            });
+        }
+
+        // FUNÇÕES DO BLOCO DE NOTAS
+        function addWordToNotepad(word) {
+            const notepad = document.getElementById('notepad');
+            const textToAdd = `${word.anumanes} (${word.portugues}) `;
+            notepad.value += textToAdd;
+        }
+
+        function clearNotepad() {
+            document.getElementById('notepad').value = '';
+        }
+
+        // FUNÇÕES DE ADICIONAR PALAVRA
+        function showAddWord() {
+            document.getElementById('add-word-modal').style.display = 'flex';
+        }
+
+        function hideAddWord() {
+            document.getElementById('add-word-modal').style.display = 'none';
+            document.getElementById('new-anumanes').value = '';
+            document.getElementById('new-portuguese').value = '';
+            document.getElementById('new-category').value = 'substantivo';
+        }
+
+        function addWord() {
+            const anumanes = document.getElementById('new-anumanes').value.trim();
+            const portugues = document.getElementById('new-portuguese').value.trim();
+            const categoria = document.getElementById('new-category').value;
+            
+            if (anumanes && portugues) {
+                const newWord = {
+                    id: Date.now(),
+                    anumanes: anumanes,
+                    portugues: portugues,
+                    categoria: categoria
+                };
+                
+                vocabulario.push(newWord);
+                hideAddWord();
+                filterWords();
+                updateWordCount();
+            }
+        }
+
+        function deleteWord(event, id) {
+            event.stopPropagation();
+            vocabulario = vocabulario.filter(word => word.id !== id);
+            filterWords();
+            updateWordCount();
+        }
+
+        function updateWordCount() {
+            document.getElementById('word-count').textContent = `${vocabulario.length} palavras salvas`;
+        }
+
+        // EVENTOS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fechar modals clicando fora
+            document.getElementById('login-modal').onclick = function(e) {
+                if (e.target === this) hideLogin();
+            };
+            
+            document.getElementById('add-word-modal').onclick = function(e) {
+                if (e.target === this) hideAddWord();
+            };
+            
+            // Busca em tempo real
+            document.getElementById('search-input').addEventListener('input', filterWords);
+            
+            // Enter no login
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') doLogin();
+            });
+            
+            // Enter nos campos de adicionar palavra
+            document.getElementById('new-portuguese').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') addWord();
+            });
+            
+            // Inicialização
+            updateWordCount();
+        });
+
+        // SERVICE WORKER PARA PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZXZlbnQpIHsKICBldmVudC53YWl0VW50aWwoY2FjaGVzLm9wZW4oJ2FudW1hbmVzLXYxJykudGhlbihmdW5jdGlvbihjYWNoZSkgewogICAgcmV0dXJuIGNhY2hlLmFkZEFsbChbJy4vJ10pOwogIH0pKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZnVuY3Rpb24oZXZlbnQpIHsKICBldmVudC5yZXNwb25kV2l0aChjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkudGhlbihmdW5jdGlvbihyZXNwb25zZSkgewogICAgcmV0dXJuIHJlc3BvbnNlIHx8IGZldGNoKGV2ZW50LnJlcXVlc3QpOwogIH0pKTsKfSk7');
+            });
+        }
+    </script>
+</body>
+</html>
